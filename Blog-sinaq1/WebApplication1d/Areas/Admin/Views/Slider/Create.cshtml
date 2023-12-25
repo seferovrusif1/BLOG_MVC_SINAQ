@@ -1,0 +1,16 @@
+﻿@model SliderCreateVm
+<div class="card-body">
+	<form method="post">
+
+		<div class="form-group">
+			<label asp-for="Description">Description</label>
+			<input type="text" class="form-control" name="Description" id="Description" placeholder="Description">
+		</div>
+		<div class="form-group">
+			<label asp-for="Rate">Rate</label>
+			<input type="number" class="form-control" name="Rate" id="Rate" placeholder="Rate">
+		</div>
+		<button type="submit" class="btn btn-success">Submit</button>
+
+	</form>
+</div>

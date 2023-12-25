@@ -1,0 +1,26 @@
+﻿@model List<SettingItemVM>
+<div>
+    <a class="btn" asp-action="Create" asp-controller="Slider">Create</a>
+</div>
+<table class="table table-dark" id="data-Table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Image</th>
+            <th>Update</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (SettingItemVM item in Model)
+        {
+
+            <tr>
+                <th>@item.id</th>
+                <th>@item.ImagePath</th>
+                <th><a asp-action="Update" asp-controller="Slider" asp-route-id="@item.id">Update</a></th>
+            </tr>
+        }
+
+    </tbody>
+</table>
