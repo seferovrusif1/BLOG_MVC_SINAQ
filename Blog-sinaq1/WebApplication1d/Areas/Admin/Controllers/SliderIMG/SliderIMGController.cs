@@ -16,14 +16,14 @@ namespace WebApplication1d.Areas.Admin.Controllers.SliderIMG
             _db = db;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var data = await _db.Sliders.Select(d => new SettingItemVM
-            {
-                id = d.Id,
-            }).ToListAsync();
-            return View(data);
-        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    var data = await _db.Select(d => new SettingItemVM
+        //    {
+        //        id = d.Id,
+        //    }).ToListAsync();
+        //    return View();
+        //}
        
     }
 }
