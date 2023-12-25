@@ -45,29 +45,36 @@ namespace WebApplication1d.Areas.Admin.Controllers.Slider
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(int? id)
         {
             var data = await _db.Sliders.FindAsync(id);
 
             return View(new SliderUpdateVM
             {
-                Id = id,
                 Description = data.Description,
                 Rate = data.Rate
             });
         }
         [HttpPost]
-        public async Task<IActionResult> Update( SliderUpdateVM vm)
+        public async Task<IActionResult> Update(int id, SliderUpdateVM vm)
         {
-            var data = await _db.Sliders.FindAsync(vm.Id);
+            if (id == null || id <= 0) return BadRequest();
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+            var data = await _db.Sliders.FindAsync(id);
             data.Description = vm.Description;
             data.Rate = vm.Rate;
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
+            if (id == null) return BadRequest();
+
             var data = await _db.Sliders.FindAsync(id);
+            if (data == null) return NotFound();
             _db.Sliders.Remove(data);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

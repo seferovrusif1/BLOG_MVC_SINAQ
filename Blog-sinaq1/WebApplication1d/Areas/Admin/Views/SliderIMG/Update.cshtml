@@ -1,0 +1,19 @@
+﻿@model SettingUpdateVM
+<div class="card-body">
+	<form method="post" enctype="multipart/form-data">
+
+		<div class="form-group">
+			<label asp-for="ImagePathstr">LastIMG</label>
+			<img width="200" src="~/@Model.ImagePathstr" />
+			<input asp-for="ImagePathstr" type="hidden" value="@Model.ImagePathstr" class=" class="hover-image">
+			<span asp-validation-for="ImagePath" class="text-danger"></span>
+		</div>
+		<div class="form-group">
+			<input asp-for="ImagePath" type="file" accept="image/*" class="form-control">
+			<span asp-validation-for="ImagePath" class="text-danger"></span>
+		</div>
+		
+		<button class="btn btn-success">Submit</button>
+
+	</form>
+</div>

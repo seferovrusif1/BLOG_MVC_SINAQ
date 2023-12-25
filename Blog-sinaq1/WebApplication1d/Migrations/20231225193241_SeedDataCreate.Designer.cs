@@ -11,8 +11,8 @@ using WebApplication1d.Contexts;
 namespace WebApplication1d.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20231225093404_createsad")]
-    partial class createsad
+    [Migration("20231225193241_SeedDataCreate")]
+    partial class SeedDataCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,27 +23,7 @@ namespace WebApplication1d.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("WebApplication1d.Models.Slider", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Rate")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sliders");
-                });
-
-            modelBuilder.Entity("WebApplication1d.Settings.Setting", b =>
+            modelBuilder.Entity("WebApplication1d.Models.Setting", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -65,6 +45,26 @@ namespace WebApplication1d.Migrations
                             id = 1,
                             ImagePath = "IND"
                         });
+                });
+
+            modelBuilder.Entity("WebApplication1d.Models.Slider", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rate")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sliders");
                 });
 #pragma warning restore 612, 618
         }

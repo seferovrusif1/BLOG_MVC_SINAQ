@@ -1,4 +1,4 @@
-﻿namespace WebApplication1d.Settings
+﻿namespace WebApplication1d.Models
 {
     public class Setting
     {

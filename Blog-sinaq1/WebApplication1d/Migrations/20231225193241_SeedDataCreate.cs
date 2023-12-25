@@ -4,7 +4,7 @@
 
 namespace WebApplication1d.Migrations
 {
-    public partial class createsad : Migration
+    public partial class SeedDataCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

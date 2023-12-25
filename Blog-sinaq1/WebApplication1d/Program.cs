@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication1d.Contexts;
+using WebApplication1d.Helpers;
 
 namespace WebApplication1d
 {
@@ -13,6 +14,8 @@ namespace WebApplication1d
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<BlogDbContext>(opt =>
             opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL")));
+            builder.Services.AddScoped<SliderIMGService>();
+
             var app = builder.Build();
             //builder.Services.AddIdentityCore<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<BlogDbContext>();
@@ -65,7 +68,7 @@ namespace WebApplication1d
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
+            PathConst.roothpath= app.Environment.WebRootPath;
             app.Run();
         }
     }

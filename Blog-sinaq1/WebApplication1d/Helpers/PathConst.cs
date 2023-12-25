@@ -1,4 +1,4 @@
-﻿namespace WebApplication1d.Helpers
+﻿    namespace WebApplication1d.Helpers
 {
     public static class PathConst
     {

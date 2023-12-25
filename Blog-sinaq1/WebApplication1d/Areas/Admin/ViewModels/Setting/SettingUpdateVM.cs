@@ -2,7 +2,8 @@
 {
     public class SettingUpdateVM
     {
-        public string ImagePath { get; set; }
+        public IFormFile ImagePath { get; set; }
+        public string? ImagePathstr { get; set; }
 
     }
 }
