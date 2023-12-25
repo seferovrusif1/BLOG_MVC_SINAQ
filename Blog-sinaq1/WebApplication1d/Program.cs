@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1d.Contexts;
 using WebApplication1d.Helpers;
+using WebApplication1d.Models;
 
 namespace WebApplication1d
 {
@@ -13,8 +15,32 @@ namespace WebApplication1d
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<BlogDbContext>(opt =>
-            opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL")));
+            {
+                //opt.UseSqlServer(builder.Configuration["ConnectionStrings:MSSQL"]);
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL"));
+            }).AddIdentity<AppUser, IdentityRole>(opt =>
+            {
+                opt.SignIn.RequireConfirmedEmail = false;
+            }).AddDefaultTokenProviders().AddEntityFrameworkStores<BlogDbContext>();
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+            //    options.LoginPath = new PathString("/Auth/Login");
+            //    options.LogoutPath = new PathString("/Auth/Logout");
+            //    options.AccessDeniedPath = new PathString("/Home/AccessDenied");
+            //    options.AccessDeniedPath = new PathString("/Home/AccessDenied");
+
+                options.Cookie = new()
+                {
+                    Name = "IdentityCookie",
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.Lax,
+                    SecurePolicy = CookieSecurePolicy.Always
+                };
+                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = TimeSpan.FromDays(30);
+            });
             builder.Services.AddScoped<SliderIMGService>();
+            builder.Services.AddSession();
 
             var app = builder.Build();
             //builder.Services.AddIdentityCore<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -59,7 +85,7 @@ namespace WebApplication1d
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllerRoute(
                 name: "areas",

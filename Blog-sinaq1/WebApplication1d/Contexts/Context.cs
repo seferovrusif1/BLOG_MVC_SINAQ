@@ -5,7 +5,7 @@ using WebApplication1d.Models;
 
 namespace WebApplication1d.Contexts;
 
-public class BlogDbContext : DbContext
+public class BlogDbContext : IdentityDbContext
 {
     public BlogDbContext(DbContextOptions options) : base(options)
     {
@@ -20,7 +20,7 @@ public class BlogDbContext : DbContext
         modelBuilder.Entity<Setting>().HasData(new Setting()
         {
             id = 1,
-            ImagePath = "IND"
+            ImagePath = "img\\SliderIMG\\w4ris3ke.sao35456416613473181A7A9120 (1).jpg"
         }
        );
         base.OnModelCreating(modelBuilder);
